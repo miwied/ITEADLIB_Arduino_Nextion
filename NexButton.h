@@ -232,7 +232,12 @@ public: /* methods */
      * @param number - To set up the data
      * @return true if success, false for failure
      */
-    bool Set_press_background_image_pic2(uint32_t number);				
+    bool Set_press_background_image_pic2(uint32_t number);			
+
+    /**
+     * sets a specific "pressed" color
+    */
+    void pressed();		
 };
 /**
  * @}

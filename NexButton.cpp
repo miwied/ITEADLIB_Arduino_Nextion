@@ -349,3 +349,8 @@ bool NexButton::Set_press_background_image_pic2(uint32_t number)
     sendCommand(cmd.c_str());
     return recvRetCommandFinished();
 }
+
+void NexButton::pressed()
+{
+    Set_background_color_bco(52857);
+}
