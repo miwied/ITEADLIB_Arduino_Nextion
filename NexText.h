@@ -45,12 +45,22 @@ public: /* methods */
     uint16_t getText(char *buffer, uint16_t len);
     
     /**
+     * overloaded method which allows to set values from global text
+     */
+    uint16_t getText(char *buffer, uint16_t len, const char *pageName);
+
+    /**
      * Set text attribute of component.
      *
      * @param buffer - text buffer terminated with '\0'. 
      * @return true if success, false for failure. 
      */
     bool setText(const char *buffer);    
+
+    /**
+     * overloaded method which allows to set values to global text
+     */
+    bool setText(const char *buffer, const char *pageName);
 	
     /**
      * Get bco attribute of component
@@ -164,6 +174,7 @@ public: /* methods */
      */
     bool Set_background_image_pic(uint32_t number);	
     
+    String GetNexText(int textLength);
 };
 
 /**

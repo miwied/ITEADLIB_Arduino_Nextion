@@ -44,6 +44,11 @@ public: /* methods */
      * @retval false - failed. 
      */
     bool getValue(uint32_t *number);
+
+    /**
+     * overloaded method which allows to get values from global sliders
+     */
+    bool getValue(uint32_t *number, const char *pageName);
     
     /**
      * Set the value of slider.
@@ -54,6 +59,11 @@ public: /* methods */
      * @retval false - failed. 
      */
     bool setValue(uint32_t number);
+
+    /**
+     * overloaded method which allows to set values to global sliders
+     */
+    bool setValue(uint32_t number, const char *pageName);
 	
     /**
      * Get bco attribute of component

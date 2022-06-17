@@ -29,9 +29,33 @@ uint16_t NexText::getText(char *buffer, uint16_t len)
     return recvRetString(buffer,len);
 }
 
+uint16_t NexText::getText(char *buffer, uint16_t len, const char *pageName)
+{
+    String cmd = String("get ");
+	cmd += pageName;
+	cmd += ".";
+    cmd += getObjName();
+    cmd += ".txt";
+    sendCommand(cmd.c_str());
+    return recvRetString(buffer,len);
+}
+
 bool NexText::setText(const char *buffer)
 {
     String cmd;
+    cmd += getObjName();
+    cmd += ".txt=\"";
+    cmd += buffer;
+    cmd += "\"";
+    sendCommand(cmd.c_str());
+    return recvRetCommandFinished();    
+}
+
+bool NexText::setText(const char *buffer, const char *pageName)
+{
+    String cmd;
+	cmd += pageName;
+	cmd += ".";
     cmd += getObjName();
     cmd += ".txt=\"";
     cmd += buffer;
@@ -231,6 +255,12 @@ bool NexText::Set_background_image_pic(uint32_t number)
     return recvRetCommandFinished();
 }
 
-
+String NexText::GetNexText(int textLength)
+{
+    char text_char[textLength]; //length of text
+    getText(text_char, textLength, "startseite");
+    String res = text_char + '\0'; //null terminator (end of string)
+    return String(res);
+}
 
 

@@ -28,11 +28,37 @@ bool NexSlider::getValue(uint32_t *number)
     return recvRetNumber(number);
 }
 
+bool NexSlider::getValue(uint32_t *number, const char *pageName)
+{
+    String cmd = String("get ");
+	cmd += pageName;
+	cmd += ".";
+    cmd += getObjName();
+    cmd += ".val";
+    sendCommand(cmd.c_str());
+    return recvRetNumber(number);
+}
+
 bool NexSlider::setValue(uint32_t number)
 {
     char buf[10] = {0};
     String cmd;
     
+    utoa(number, buf, 10);
+    cmd += getObjName();
+    cmd += ".val=";
+    cmd += buf;
+
+    sendCommand(cmd.c_str());
+    return recvRetCommandFinished();
+}
+
+bool NexSlider::setValue(uint32_t number, const char *pageName)
+{
+    String cmd;
+	cmd += pageName;
+	cmd += ".";
+    char buf[10] = {0};    
     utoa(number, buf, 10);
     cmd += getObjName();
     cmd += ".val=";

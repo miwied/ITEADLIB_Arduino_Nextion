@@ -48,7 +48,12 @@ public: /* methods */
      * @param len - length of buffer. 
      * @return The real length of text returned. 
      */
-    uint32_t getText(char *buffer, uint32_t len);    
+    uint32_t getText(char *buffer, uint32_t len);
+
+    /**
+     * overloaded method which allows to get values from global variables
+     */
+    uint32_t getText(char *buffer, uint32_t len, const char *pageName);    
 
     /**
      * Set text attribute of component.
@@ -56,8 +61,14 @@ public: /* methods */
      * @param buffer - text buffer terminated with '\0'. 
      * @return true if success, false for failure. 
      */
-    bool setText(const char *buffer);    
+    bool setText(const char *buffer);  
+
+    /**
+     * overloaded method which allows to set values to global variables
+     */
+    bool setText(const char *buffer, const char *pageName);    
 	
+
     /**
      * Get val attribute of component
      *
@@ -65,6 +76,11 @@ public: /* methods */
      * @return the length of the data 
      */
     uint32_t getValue(uint32_t *number);
+
+    /**
+     * overloaded method which allows to get values from global variables
+     */
+    uint32_t getValue(uint32_t *number, const char *pageName); 
 	
     /**
      * Set val attribute of component
@@ -73,6 +89,11 @@ public: /* methods */
      * @return true if success, false for failure
      */
     bool setValue(uint32_t number);
+
+    /**
+     * overloaded method which allows to set values to global variables
+     */
+    bool setValue(uint32_t number, const char *pageName); 
 };
 /**
  * @}

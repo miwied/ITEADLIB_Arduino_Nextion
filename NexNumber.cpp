@@ -25,7 +25,19 @@ bool NexNumber::getValue(uint32_t *number)
     cmd += getObjName();
     cmd += ".val";
     sendCommand(cmd.c_str());
-    return recvRetNumber(number);
+    return recvRetNumber(number, 350);
+}
+
+bool NexNumber::getValue(uint32_t *number, const char *pageName)
+{
+    String cmd = String("get ");
+    cmd += pageName;
+    cmd += ".";
+	cmd += getObjName();
+    cmd += ".val";
+    sendCommand(cmd.c_str());
+    // changed timeout time to 350 (because of issues getting data)
+    return recvRetNumber(number, 350);
 }
 
 bool NexNumber::setValue(uint32_t number)
@@ -34,6 +46,22 @@ bool NexNumber::setValue(uint32_t number)
     String cmd;
     
     utoa(number, buf, 10);
+    cmd += getObjName();
+    cmd += ".val=";
+    cmd += buf;
+
+    sendCommand(cmd.c_str());
+    return recvRetCommandFinished();
+}
+
+bool NexNumber::setValue(uint32_t number, const char *pageName)
+{
+    char buf[10] = {0};    
+    String cmd;
+
+    utoa(number, buf, 10);
+	cmd += pageName;
+	cmd += ".";
     cmd += getObjName();
     cmd += ".val=";
     cmd += buf;

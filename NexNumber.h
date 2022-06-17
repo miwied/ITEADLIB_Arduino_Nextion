@@ -42,7 +42,12 @@ public: /* methods */
      * @return The real length of text returned. 
      */
     bool getValue(uint32_t *number);
-    
+
+    /**
+     * overloaded method which allows to get values from global numbers
+     */
+    bool getValue(uint32_t *number, const char *pageName);
+
     /**
      * Set number attribute of component.
      *
@@ -50,7 +55,12 @@ public: /* methods */
      * @return true if success, false for failure. 
      */
     bool setValue(uint32_t number);
-	
+
+    /**
+     * overloaded method which allows to set values to global numbers
+     */
+    bool setValue(uint32_t number, const char *pageName);
+
     /**
      * Get bco attribute of component
      *

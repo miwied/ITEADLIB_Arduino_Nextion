@@ -29,11 +29,38 @@ bool NexDSButton::getValue(uint32_t *number)
     return recvRetNumber(number);
 }
 
+bool NexDSButton::getValue(uint32_t *number, const char *pageName)
+{
+    String cmd = String("get ");
+    cmd += pageName;
+    cmd += ".";
+    cmd += getObjName();
+    cmd += ".val";
+    sendCommand(cmd.c_str());
+    return recvRetNumber(number);
+}
+
 bool NexDSButton::setValue(uint32_t number)
 {
     char buf[10] = {0};
     String cmd;
     
+    utoa(number, buf, 10);
+    cmd += getObjName();
+    cmd += ".val=";
+    cmd += buf;
+
+    sendCommand(cmd.c_str());
+    return recvRetCommandFinished();
+}
+
+bool NexDSButton::setValue(uint32_t number, const char *pageName)
+{
+    char buf[10] = {0};
+    String cmd;
+
+    cmd += pageName;
+    cmd += ".";
     utoa(number, buf, 10);
     cmd += getObjName();
     cmd += ".val=";

@@ -40,7 +40,7 @@ public: /* methods */
      * @copydoc NexObject::NexObject(uint8_t pid, uint8_t cid, const char *name);
      */
     NexDSButton(uint8_t pid, uint8_t cid, const char *name);
-    
+
     /**
      * Get number attribute of component.
      *
@@ -50,12 +50,22 @@ public: /* methods */
     bool getValue(uint32_t *number);
     
     /**
+     * overloaded method which allows to get values from global ds buttons
+     */
+    bool getValue(uint32_t *number, const char *pageName);
+
+    /**
      * Set number attribute of component.
      *
      * @param number - number buffer. 
      * @return true if success, false for failure. 
      */
     bool setValue(uint32_t number);
+
+    /**
+     * overloaded method which allows to set values on global ds buttons
+     */
+    bool setValue(uint32_t number, const char *pageName);
 	
     /**
      * Get text attribute of component.
