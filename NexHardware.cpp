@@ -216,14 +216,44 @@ bool recvRetCommandFinished(uint32_t timeout)
     return ret;
 }
 
+/*
+    true = nextion is sleeping
+    false = nextion is awake
+*/
+bool getNextionSleepState()
+{
+  uint32_t sleepState; 
+  sendCommand("get sleep");
+  recvRetNumber(&sleepState, 500);
+  return sleepState;
+}
+
+/*
+    toggles the nextion sleep state
+*/
+void toggleNextionSleep()
+{
+  // get nextion sleep state
+  if(getNextionSleepState())
+  {
+    // waking nextion up
+    sendCommand("sleep=0");
+  }
+  else
+  {
+    // put nextion to sleep
+    // sendCommand("lowpower=1");
+    sendCommand("sleep=1");
+  }
+}
 
 bool nexInit(void)
 {
     bool ret1 = false;
     bool ret2 = false;
     
-    dbSerialBegin(9600);
-    nexSerial.begin(9600);
+    dbSerialBegin(115200);
+    nexSerial.begin(921600);
     sendCommand("");
     sendCommand("bkcmd=1");
     ret1 = recvRetCommandFinished();
